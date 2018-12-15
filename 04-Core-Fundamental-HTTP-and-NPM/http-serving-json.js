@@ -10,14 +10,16 @@ http.createServer((req, serverRes) => {
             httpRes.on('data', data => {
                 httpRes.setEncoding('utf8');
                 console.log(data);
+                serverRes.write(data);
             });
-
-        httpRes.ond('end', () => {
+        httpRes.on('end', () => {
             serverRes.end();
             console.log('its over');
         });
-
         });
+    } else {
+        serverRes.writeHead(404, {'Content-Type' : 'text/plain'});
+        serverRes.end('404 Error, could not find you are looking for');
     }
 
 }).listen(4444);
