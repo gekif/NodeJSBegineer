@@ -4,5 +4,9 @@ const WSS = new WebSocketServer({
 });
 
 WSS.on('connection', (ws) => {
+    ws.on('message', (message) => {
+        console.log(message);
+    });
+
     console.log('We are connected');
 });
