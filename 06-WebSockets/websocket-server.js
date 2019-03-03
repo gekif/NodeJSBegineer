@@ -5,9 +5,13 @@ const WSS = new WebSocketServer({
 
 WSS.on('connection', (ws) => {
     ws.on('message', (message) => {
-        WSS.clients.forEach((client) => {
-            client.send(message);
-        });
+        if (message === 'close') {
+            ws.close();
+        } else {
+            WSS.clients.forEach((client) => {
+                client.send(message);
+            });
+        }
     });
 
     console.log('We are connected');
