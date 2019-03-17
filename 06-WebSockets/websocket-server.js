@@ -1,4 +1,4 @@
-const WebSocketServer = require('ws').Server;
+const WebSocketServer = require('./ws').Server;
 const WSS = new WebSocketServer({
     port: 3232
 });

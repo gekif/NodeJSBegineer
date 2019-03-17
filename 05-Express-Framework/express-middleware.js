@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('./express');
 
 let app = express();
 
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="public/style.css">
         <title>Title</title>
     </head>
     <body>

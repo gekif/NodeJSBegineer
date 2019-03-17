@@ -1,5 +1,5 @@
-const https = require('https');
-const fs = require('fs');
+const https = require('./https');
+const fs = require('./fs');
 
 const url = 'https://jsonplaceholder.typicode.com/posts';
 

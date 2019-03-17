@@ -1,6 +1,6 @@
-var readline = require('readline');
-var util = require('util');
-var RL = readline.createInterface(process.stdin, process.stdout);
+let readline = require('./readline');
+let util = require('./util');
+let RL = readline.createInterface(process.stdin, process.stdout);
 
 RL.question('What is your name? ', (name) => {
     // console.log(name);
