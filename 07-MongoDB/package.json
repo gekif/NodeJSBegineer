@@ -1,11 +1,10 @@
 {
-  "name": "demo",
+  "name": "node2",
   "version": "1.0.0",
-  "description": "example app for class",
-  "main": "index.js",
+  "description": "database stuff",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fikar",
   "license": "ISC",
@@ -13,6 +12,7 @@
     "axios": "^0.17.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "mongodb": "^3.0.0-rc0",
     "ws": "^3.3.1"
   },
   "devDependencies": {
