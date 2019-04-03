@@ -12,19 +12,20 @@ mongoose.connection
 */
 
 
-const {MongoClient, ObjectID} = require('mongodb');
+const {MongoClient, ObjectId} = require('mongodb');
 
 MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
     // Check if it is error when connected to the database
     if (err) throw err;
-    const object = new ObjectID();
-    console.log(object);
+    // const object = new ObjectID();
+    // console.log(object);
 
     console.log('CONNECTED');
 
-    // Create Data
+    // Defining Database
     const db = client.db('animals');
+
 
     // Inserting Data
     /*db.collection('mammals').insertOne({
@@ -40,11 +41,30 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     });*/
 
 
-
     // Fetching Data
-    db.collection('mammals').find().toArray(function (err, result) {
-        if (err) throw err;
+    /* db.collection('mammals').find().toArray(function (err, result) {
+         if (err) throw err;
 
-        console.log(result)
-    })
+         console.log(result)
+     })*/
+
+
+    // Updating Data
+    db.collection('mammals').findOneAndUpdate({
+            _id: new ObjectId('5ca4bb951ed2e4308cb1ea12')
+        },
+        {
+            $set:
+                {
+                    name: 'setiaps'
+                }
+        })
+
+        // This function will log the previous data before it's updated
+        .then(result => {
+            console.log(result);
+        }).catch(err => {
+            console.log(err);
+        });
+
 });
