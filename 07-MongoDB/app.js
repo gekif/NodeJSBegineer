@@ -25,6 +25,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
     // Defining Database
     const db = client.db('animals');
+    const collect = 'mammals';
 
 
     // Inserting Data
@@ -50,7 +51,7 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
 
     // Updating Data
-    db.collection('mammals').findOneAndUpdate({
+    /*db.collection('mammals').findOneAndUpdate({
             _id: new ObjectId('5ca4bb951ed2e4308cb1ea12')
         },
         {
@@ -65,6 +66,21 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
             console.log(result);
         }).catch(err => {
             console.log(err);
-        });
+        });*/
+
+
+    // Deleting Data
+
+    //Example
+/*    db.collection('mammals').deleteMany({name: 'setiaps'});
+    db.collection('mammals').deleteOne({name: 'setiaps'});
+    db.collection('mammals').deleteAndFind({name: 'setiaps'});*/
+
+    // Operation
+    db.collection(collect).findOneAndDelete({
+        _id: new ObjectId('5ca4c20015e60d2a8025e892')
+    }).then(result => {
+        console.log(result);
+    });
 
 });
