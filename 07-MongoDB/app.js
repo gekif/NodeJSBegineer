@@ -26,8 +26,8 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
     // Create Data
     const db = client.db('animals');
 
-    // Create function
-    db.collection('mammals').insertOne({
+    // Inserting Data
+    /*db.collection('mammals').insertOne({
         name: 'Nunung',
         leg: 3
     }, (err, result) => {
@@ -37,14 +37,14 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
         // Check if the data is inserted
         console.log('INSERTED');
-    });
+    });*/
 
 
 
-
-    /*db.collection('mammals').find().toArray(function (err, result) {
-        if (err) throw err
+    // Fetching Data
+    db.collection('mammals').find().toArray(function (err, result) {
+        if (err) throw err;
 
         console.log(result)
-    })*/
+    })
 });
