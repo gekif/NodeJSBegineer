@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/animals', {useMongoClient: true});
@@ -6,17 +7,38 @@ mongoose.connection
     .on('error', (err) => {
         console.log('could bot connect', err);
     });
+*/
 
 
-/*var MongoClient = require('mongodb').MongoClient
+const MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
-    if (err) throw err
+MongoClient.connect('mongodb://localhost:27017', function (err, client) {
+
+    // Check if it is error when connected to the database
+    if (err) throw err;
     console.log('CONNECTED');
 
-    /!*db.collection('mammals').find().toArray(function (err, result) {
+    // Create Data
+    const db = client.db('animals');
+
+    // Create function
+    db.collection('mammals').insertOne({
+        name: 'horse'
+    }, (err, result) => {
+        if (err) {
+            return console.log(err);
+        }
+
+        // Check if the data is inserted
+        console.log('INSERTED');
+    });
+
+
+
+
+    /*db.collection('mammals').find().toArray(function (err, result) {
         if (err) throw err
 
         console.log(result)
-    })*!/
-})*/
+    })*/
+});
