@@ -1,4 +1,6 @@
 /*
+
+// Create Schema For The Database
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/animals', {useMongoClient: true});
@@ -10,12 +12,15 @@ mongoose.connection
 */
 
 
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectID} = require('mongodb');
 
 MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
     // Check if it is error when connected to the database
     if (err) throw err;
+    const object = new ObjectID();
+    console.log(object);
+
     console.log('CONNECTED');
 
     // Create Data
@@ -23,7 +28,8 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
     // Create function
     db.collection('mammals').insertOne({
-        name: 'horse'
+        name: 'Nunung',
+        leg: 3
     }, (err, result) => {
         if (err) {
             return console.log(err);
