@@ -15,8 +15,8 @@ mongoose.connection
 
 // Inserting Data
 const newUser = new User({
-    firstName: 'Alien',
-    lastName: 'Setiaaa',
+    firstName: 'Febrina',
+    lastName: 'Pujihastuti',
     isActive: 1
 });
 
