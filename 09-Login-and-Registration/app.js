@@ -25,6 +25,24 @@ mongoose.connection
 
 
 
+// Post Request
+app.post('/register', (req, res) => {
+
+    // Create User
+    const newUser = new User();
+
+    // Set Value Using Body Parser
+    newUser.email = req.body.email;
+    newUser.password = req.body.password;
+
+    // Send Response
+    res.send(newUser);
+
+
+});
+
+
+
 // Make Port
 app.listen(4111, () => {
     console.log('Listening on port 4111');
