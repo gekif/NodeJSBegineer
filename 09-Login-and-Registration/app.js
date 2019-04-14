@@ -1,10 +1,21 @@
 
 // Require Declaration
+
+// Setting Up Express
 const express = require('express');
 const app = express();
+
+// Setting Up Mongoose
 const mongoose = require('mongoose');
+
+// Setting Up Body Parser
 const bodyParser = require('body-parser');
+
+// Setting Up User
 const User = require('./models/User');
+
+// Settubg Up Bcrypt
+const bcrypt = require('bcryptjs');
 
 
 
@@ -46,13 +57,29 @@ app.post('/register', (req, res) => {
     newUser.password = req.body.password;
 
 
-    // Saving User
-    newUser.save().then(userSaved => {
-        res.send(`USER WITH EMAIL: ${userSaved.email} SAVE SUCCESSFULLY`);
+    // Adding Bcrypt
+    bcrypt.genSalt(10, (err, salt) => {
 
-    // Catch Error When Saving
-    }).catch(err => {
-        res.send('User cannot be save because: ' + err);
+        //Hashing
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+
+            // Throw error if hashing password fail
+            if(err) return err;
+
+            // Hashing the password
+            newUser.password = hash;
+
+            // Saving User
+            newUser.save().then(userSaved => {
+                res.send(`USER WITH EMAIL: ${userSaved.email} SAVE SUCCESSFULLY`);
+
+                // Catch Error When Saving
+            }).catch(err => {
+                res.send('User cannot be save because: ' + err);
+            });
+
+        })
+
     });
 
 
