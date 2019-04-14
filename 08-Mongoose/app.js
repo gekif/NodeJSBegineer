@@ -125,8 +125,8 @@ app.get('/users', (req, res) => {
 
 
 // Put Data
-// First Method
-app.put('/users/:id', (req, res) => {
+// Second Method
+/*app.put('/users/:id', (req, res) => {
 
     // Find The ID and Update it
     User.findOne({_id: req.params.id})
@@ -147,8 +147,60 @@ app.put('/users/:id', (req, res) => {
         });
 
 
-});
+});*/
 
+
+
+// Delete Data
+//First Method
+/*app.delete('/users/:id', (req, res) => {
+
+    // Find The ID For Delete it
+    User.findOne({_id: req.params.id}).then(user => {
+
+    // Remove Method
+        user.remove().then(userRemove => {
+
+    // Return the remove
+            res.send('user remove:\n' + userRemove);
+        });
+    });
+
+
+});*/
+
+
+
+// Delete Data
+// Second Method
+/*app.delete('/users/:id', (req, res) => {
+
+    // Find The ID For Delete it
+    User.findByIdAndRemove(req.params.id).then(userRemoved => {
+
+    // Remove method using temper string
+        res.send(`User ${userRemoved.firstName} removed`);
+    });
+
+
+});*/
+
+
+
+// Delete Data
+// Third Method
+app.delete('/users/:id', (req, res) => {
+
+    // Find The ID For Delete it
+    User.remove({ _id: req.params.id }).then(userRemoved => {
+
+        // Remove method using temper string
+        // Return User Undefined
+        res.send(`User ${userRemoved.firstName} removed`);
+    });
+
+
+});
 
 
 // Port Connection
