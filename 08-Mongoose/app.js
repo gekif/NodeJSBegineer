@@ -43,8 +43,13 @@ app.post('/users', (req, res) => {
 
     // Saving Data Method Using Promises
     newUser.save().then(savedUser => {
-        console.log('saved user');
+
+        // Save User
         res.send('USER SAVED');
+
+        // Catch Error
+    }).catch(err => {
+        res.status(404).send('USER NOT SAVE BECAUSE ....');
     });
 
 
