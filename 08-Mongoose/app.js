@@ -80,7 +80,7 @@ app.get('/users', (req, res) => {
 
 
 // Patch Data
-app.patch('/users/:id', (req, res) => {
+/*app.patch('/users/:id', (req, res) => {
 
     // Declaration
     const id = req.params.id;
@@ -92,6 +92,58 @@ app.patch('/users/:id', (req, res) => {
     // After Find, Save it
         .then(savedUser => {
             res.send('USER SAVED BY PATCH AGAIN');
+        });
+
+
+});*/
+
+
+
+// Put Data
+// First Method
+/*app.put('/users/:id', (req, res) => {
+
+    // Declaration
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+
+    // Find The ID and Update it
+    User.findByIdAndUpdate(id, {
+        $set: {
+            firstName: firstName,
+            lastName: lastName
+        }}, { new: true })
+
+    // After Find, Save it
+        .then(savedUser => {
+            res.send('USER SAVED BY PUT');
+        });
+
+
+});*/
+
+
+// Put Data
+// First Method
+app.put('/users/:id', (req, res) => {
+
+    // Find The ID and Update it
+    User.findOne({_id: req.params.id})
+
+    // After Find, Define it
+        .then(user => {
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+
+    // After define save it
+            user.save().then(userSaved => {
+                res.send(userSaved);
+
+    // Catch The Error If Failed
+            }).catch(err => {
+                console.log(err);
+            });
         });
 
 
