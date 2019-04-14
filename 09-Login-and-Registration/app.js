@@ -40,12 +40,24 @@ app.post('/register', (req, res) => {
     // Create User
     const newUser = new User();
 
+
     // Set Value Using Body Parser
     newUser.email = req.body.email;
     newUser.password = req.body.password;
 
-    // Send Response
-    res.send(newUser);
+
+    // Saving User
+    newUser.save().then(userSaved => {
+        res.send(`USER WITH EMAIL: ${userSaved.email} SAVE SUCCESSFULLY`);
+
+    // Catch Error When Saving
+    }).catch(err => {
+        res.send('User cannot be save because: ' + err);
+    });
+
+
+    // For Show What is send (cant be commented)
+    // res.send(newUser);
 
 
 });
