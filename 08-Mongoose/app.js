@@ -3,6 +3,12 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+
+
+// Body Parser Used
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // Add Promises
@@ -29,9 +35,9 @@ app.post('/users', (req, res) => {
 
     // Inserting Data
     const newUser = new User({
-        firstName: 'Regitha',
-        lastName: 'Cahyani',
-        isActive: 1
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        isActive: req.body.isActive
     });
 
 
