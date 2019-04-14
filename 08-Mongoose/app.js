@@ -79,6 +79,26 @@ app.get('/users', (req, res) => {
 
 
 
+// Patch Data
+app.patch('/users/:id', (req, res) => {
+
+    // Declaration
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+
+    // Find The ID and Update it
+    User.findByIdAndUpdate(id, { $set: { firstName: firstName }}, { new: true })
+
+    // After Find, Save it
+        .then(savedUser => {
+            res.send('USER SAVED BY PATCH AGAIN');
+        });
+
+
+});
+
+
+
 // Port Connection
 const port = 4444 || process.env.PORT;
 
