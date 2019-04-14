@@ -14,23 +14,30 @@ mongoose.connection
     }
 );
 
-app.post('/users');
+
+app.get('/', (req, res) => {
+    res.send("ROOT");
+});
+
+app.post('/users', (req, res) => {
+
+});
 
 
 // Inserting Data
 const newUser = new User({
-    firstName: 'Triana',
-    lastName: 'Dina',
+    firstName: 'Regitha',
+    lastName: 'Cahyani',
     isActive: 1
 });
 
 
 // Saving Data Method
-newUser.save((err, dataSaved) =>  {
+/*newUser.save((err, dataSaved) =>  {
     if (err) return err;
 
     console.log(dataSaved);
-});
+});*/
 
 
 const port = 4444 || process.env.PORT;
