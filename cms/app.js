@@ -3,6 +3,12 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
+
+// Connect to MongoDB using Mongoose
+mongoose.connect('mongodb://localhost:27017/cms', {useMongoClient: true}).then(db => {
+    console.log("MONGO connected")
+}).catch(error => console.log(error));
 
 // Directory of public
 app.use(express.static(path.join(__dirname, 'public')));

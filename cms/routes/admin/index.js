@@ -12,9 +12,9 @@ router.get('/', (req, res) => {
     res.render('admin/index');
 });
 
-router.get('/dashboard', (req, res) => {
+/*router.get('/dashboard', (req, res) => {
     res.render('admin/dashboard');
-});
+});*/
 
 
 
