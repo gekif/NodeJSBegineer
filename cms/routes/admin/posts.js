@@ -10,9 +10,9 @@ router.all('/*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    // res.send('IT WORKS');
-    // res.render('admin/posts/index');
-    res.render('admin/posts');
+    Post.find({}).then(posts => {
+        res.render('admin/posts', {posts: posts});
+    });
 });
 
 router.get('/create', (req, res) => {
