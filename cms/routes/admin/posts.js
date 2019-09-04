@@ -9,8 +9,15 @@ router.all('/*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.send('IT WORKS');
+    // res.send('IT WORKS');
+    res.render('admin/posts/index');
 });
+
+router.get('/create', (req, res) => {
+
+    res.render('admin/posts/create');
+});
+
 
 
 module.exports = router;
