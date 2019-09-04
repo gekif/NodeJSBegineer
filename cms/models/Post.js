@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
+
 const Schema = mongoose.Schema;
 const PostSchema = new Schema({
-    user: {
-
-    },
 
     title: {
         type: String,
@@ -26,3 +24,6 @@ const PostSchema = new Schema({
         required: true
     }
 });
+
+
+module.exports = mongoose.model('Post', PostSchema);
