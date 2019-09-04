@@ -21,7 +21,9 @@ router.get('/create', (req, res) => {
  * Connecting to the database
  */
 router.post('/create', (req, res) => {
-    res.send('WORKED');
+    // res.send('WORKED');
+
+    console.log(req.body);
 });
 
 
