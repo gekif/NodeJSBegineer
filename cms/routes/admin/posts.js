@@ -10,8 +10,8 @@ router.all('/*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    // res.send('IT WORKS');
-    res.render('admin/posts/index');
+    res.send('IT WORKS');
+    // res.render('admin/posts/index');
 });
 
 router.get('/create', (req, res) => {
@@ -35,11 +35,18 @@ router.post('/create', (req, res) => {
         allowComments = false;
     }*/
 
-    Post({
+    const newPost = new Post({
         title: req.body.title,
         status: req.body.status,
-        allowComments: req.body.allowComments,
+        allowComments: allowComments,
         body: req.body.body
+    });
+
+    newPost.save().then(savedPost => {
+        console.log(savedPost);
+        res.redirect('/admin/posts');
+    }).catch(error => {
+        console.log('Could not save post');
     });
 
     // console.log(req.body);
