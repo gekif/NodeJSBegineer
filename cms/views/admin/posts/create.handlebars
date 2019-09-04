@@ -10,12 +10,23 @@
     <div class="form-group">
         <label for="status">Status</label>
         <select name="status" id="status" class="form-control">
-            <option value="">Status</option>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+            <option value="draft">Draft</option>
         </select>
     </div>
-    
-    
 
-    <button type="submit">Submit</button>
+    <div class="form-check">
+        <label for="allowComments">Allow Comments</label>
+        <input name="allowComments" type="checkbox" class="form-check-input" id="allowComments" style="position: relative; margin: 0 0">
+
+    </div>
+
+    <div class="form-group">
+        <label for="body">Body</label>
+        <textarea name="body" cols="30" rows="10" class="form-control" id="body" placeholder="Enter Description"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
