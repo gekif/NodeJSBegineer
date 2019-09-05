@@ -8,7 +8,9 @@ router.all('/*', (req, res, next) => {
     next();
 });
 
-
+/**
+ * Display data to from database
+ */
 router.get('/', (req, res) => {
     Post.find({}).then(posts => {
         res.render('admin/posts', {posts: posts});
@@ -20,7 +22,6 @@ router.get('/create', (req, res) => {
 });
 
 /**
- * Connecting to the database
  * Insert data to the database
  */
 router.post('/create', (req, res) => {
@@ -29,6 +30,8 @@ router.post('/create', (req, res) => {
     let allowComments = true;
 
     (req.body.allowComments) ? allowComments = true : allowComments = false;
+
+    // Second condition
 /*
     if (req.body.allowComments) {
         allowComments = true;
@@ -49,10 +52,13 @@ router.post('/create', (req, res) => {
     }).catch(error => {
         console.log('Could not save post');
     });
+});
 
-    // console.log(req.body);
+router.get('/edit/:id', (req, res) => {
+    // Testing the id
+    // res.send(req.params.id);
 
-    // console.log(req.body.allowComments);
+    res.render('admin/posts/edit');
 });
 
 
