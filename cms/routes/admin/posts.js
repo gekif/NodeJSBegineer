@@ -31,6 +31,7 @@ router.post('/create', (req, res) => {
     // Create variable to set up the initial allow comments
     let allowComments = true;
 
+    // Condition Using Ternary Operator
     (req.body.allowComments) ? allowComments = true : allowComments = false;
 
     // Second condition
@@ -75,7 +76,22 @@ router.get('/edit/:id', (req, res) => {
  * PUT Request
  */
 router.put('/edit/:id', (req, res) => {
-    res.send('IT WORKS');
+    // Testing Put Request
+    // res.send('IT WORKS');
+
+    Post.findOne({_id: req.params.id}).then(post => {
+        (req.body.allowComments) ? allowComments = true : allowComments = false;
+
+        post.title = req.body.title;
+        post.status = req.body.status;
+        post.allowComments = req.body.allowComments;
+        post.body = req.body.body;
+
+        post.save().then(updatedPost => {
+            res.redirect('/admin/posts');
+        });
+    });
+
 });
 
 
