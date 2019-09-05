@@ -71,5 +71,12 @@ router.get('/edit/:id', (req, res) => {
 });
 
 
+/**
+ * PUT Request
+ */
+router.put('/edit/:id', (req, res) => {
+    res.send('IT WORKS');
+});
+
 
 module.exports = router;

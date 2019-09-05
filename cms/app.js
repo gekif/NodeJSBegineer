@@ -5,6 +5,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // Fix Deprecated Promises
 mongoose.Promise = global.Promise;
@@ -29,6 +30,9 @@ app.set('view engine', 'handlebars');
 // Set Up Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Load Routes
 const home = require('./routes/home/index');
