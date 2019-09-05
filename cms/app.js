@@ -18,8 +18,11 @@ mongoose.connect('mongodb://localhost:27017/cms', {useMongoClient: true}).then(d
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set View Engine
-app.engine('handlebars', exphbs({defaultLayout: 'home'}));
+app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select}}));
 app.set('view engine', 'handlebars');
+
+// Register handlebars helpers
+const {select} = require('./helpers/handlebars-helpers');
 
 // Set Up Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
