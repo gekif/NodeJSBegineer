@@ -17,12 +17,14 @@ mongoose.connect('mongodb://localhost:27017/cms', {useMongoClient: true}).then(d
 // Directory of public
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Register handlebars helpers
+const {select} = require('./helpers/handlebars-helpers');
+
 // Set View Engine
 app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select}}));
 app.set('view engine', 'handlebars');
 
-// Register handlebars helpers
-const {select} = require('./helpers/handlebars-helpers');
+
 
 // Set Up Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
