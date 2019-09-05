@@ -8,6 +8,7 @@ router.all('/*', (req, res, next) => {
     next();
 });
 
+
 /**
  * Display data to from database
  */
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
+
 
 /**
  * Insert data to the database
@@ -54,11 +56,18 @@ router.post('/create', (req, res) => {
     });
 });
 
+
+/**
+ * Editing the data
+ */
 router.get('/edit/:id', (req, res) => {
     // Testing the id
     // res.send(req.params.id);
 
-    res.render('admin/posts/edit');
+    Post.findOne({_id: req.params.id}).then(post => {
+        res.render('admin/posts/edit', {post: post});
+    });
+
 });
 
 
