@@ -13,7 +13,8 @@ router.all('/*', (req, res, next) => {
  * Display data to from database
  */
 router.get('/', (req, res) => {
-    Post.find({}).then(posts => {
+    Post.find({})
+        .then(posts => {
         res.render('admin/posts', {posts: posts});
     });
 });
@@ -49,7 +50,8 @@ router.post('/create', (req, res) => {
         body: req.body.body
     });
 
-    newPost.save().then(savedPost => {
+    newPost.save()
+        .then(savedPost => {
         console.log(savedPost);
         res.redirect('/admin/posts');
     }).catch(error => {
@@ -65,7 +67,8 @@ router.get('/edit/:id', (req, res) => {
     // Testing the id
     // res.send(req.params.id);
 
-    Post.findOne({_id: req.params.id}).then(post => {
+    Post.findOne({_id: req.params.id})
+        .then(post => {
         res.render('admin/posts/edit', {post: post});
     });
 
@@ -79,7 +82,8 @@ router.put('/edit/:id', (req, res) => {
     // Testing Put Request
     // res.send('IT WORKS');
 
-    Post.findOne({_id: req.params.id}).then(post => {
+    Post.findOne({_id: req.params.id})
+        .then(post => {
         (req.body.allowComments) ? allowComments = true : allowComments = false;
 
         post.title = req.body.title;
@@ -87,11 +91,24 @@ router.put('/edit/:id', (req, res) => {
         post.allowComments = req.body.allowComments;
         post.body = req.body.body;
 
-        post.save().then(updatedPost => {
+        post.save()
+            .then(updatedPost => {
             res.redirect('/admin/posts');
         });
     });
 
+});
+
+
+/**
+ * Delete Data
+ */
+
+router.delete('/:id', (req, res) => {
+    Post.remove({_id: req.params.id})
+        .then(result => {
+            res.redirect('/admin/posts');
+        });
 });
 
 
