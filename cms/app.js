@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const upload = require('express-fileupload');
 
 // Fix Deprecated Promises
 mongoose.Promise = global.Promise;
@@ -24,6 +25,9 @@ const {select} = require('./helpers/handlebars-helpers');
 // Set View Engine
 app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select}}));
 app.set('view engine', 'handlebars');
+
+// Upload Middleware
+app.use(upload);
 
 
 
