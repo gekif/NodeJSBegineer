@@ -35,9 +35,7 @@ app.set('view engine', 'handlebars');
 
 
 // Upload Middleware
-app.use(upload({
-    limits: { fileSize: 50 * 1024 * 1024 }
-}));
+app.use(upload());
 
 // Set Up Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -56,7 +54,7 @@ app.use(session({
 
 }));
 
-app.use(flash);
+app.use(flash());
 
 // Local variables using Middleware
 app.use((req, res, next) => {

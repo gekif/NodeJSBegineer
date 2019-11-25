@@ -120,6 +120,8 @@ router.put('/edit/:id', (req, res) => {
     // Testing Put Request
     // res.send('IT WORKS');
 
+
+
     Post.findOne({_id: req.params.id})
         .then(post => {
         (req.body.allowComments) ? allowComments = true : allowComments = false;
@@ -128,6 +130,16 @@ router.put('/edit/:id', (req, res) => {
         post.status = req.body.status;
         post.allowComments = req.body.allowComments;
         post.body = req.body.body;
+
+        if (!isEmpty(req.files)) {
+            let file = req.files.file;
+            fileName = Date.now() + '-' + file.name;
+            post.file = fileName;
+
+            file.mv('./public/uploads/' + fileName, (err) => {
+                if (err) throw err;
+            });
+        }
 
         post.save()
             .then(updatedPost => {
