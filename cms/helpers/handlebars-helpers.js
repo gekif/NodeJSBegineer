@@ -8,7 +8,7 @@ module.exports = {
     /**
      * @return {string}
      */
-    generateTime: function(date, format) {
+    generateDate: function(date, format) {
         return moment(date).format(format);
     }
 };
