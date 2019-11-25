@@ -143,7 +143,8 @@ router.put('/edit/:id', (req, res) => {
 
         post.save()
             .then(updatedPost => {
-            res.redirect('/admin/posts');
+                req.flash('success_message', 'Post was successfully updated');
+                res.redirect('/admin/posts');
         });
     });
 
@@ -157,20 +158,15 @@ router.put('/edit/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     Post.findOne({_id: req.params.id})
         .then(post  => {
+
             fs.unlink(uploadDir + post.file, (err) => {
-
-                /*if (err) {
-                    throw err;
-                } else {
-                    post.remove();
-                    res.redirect('/admin/posts');
-                }*/
-
                 post.remove();
+                req.flash('success_message', 'Post was successfully deleted');
                 res.redirect('/admin/posts');
 
             });
         });
+
 });
 
 
