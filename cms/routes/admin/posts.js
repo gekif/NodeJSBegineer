@@ -30,46 +30,61 @@ router.get('/create', (req, res) => {
  * Insert data to the database
  */
 router.post('/create', (req, res) => {
-    let fileName = '';
 
-   if (!isEmpty(req.files)) {
-       let file = req.files.file;
-       fileName = Date.now() + '-' + file.name;
+    let errors = [];
 
-       file.mv('./public/uploads/' + fileName, (err) => {
-           if (err) throw err;
-       });
-   }
+    if (!req.body.title) {
+        errors.push({
+            message: 'Please add a title'
+        })
+    }
 
-    // Create variable to set up the initial allow comments
-    let allowComments = true;
-
-    // Condition Using Ternary Operator
-    (req.body.allowComments) ? allowComments = true : allowComments = false;
-
-    // Second condition
-/*
-    if (req.body.allowComments) {
-        allowComments = true;
+    if (errors.length > 0) {
+        res.render('admin/posts/create', {
+            errors: errors
+        });
     } else {
-        allowComments = false;
-    }*/
+        let fileName = '';
 
-    const newPost = new Post({
-        title: req.body.title,
-        status: req.body.status,
-        allowComments: req.body.allowComments,
-        body: req.body.body,
-        file: fileName
-    });
+        if (!isEmpty(req.files)) {
+            let file = req.files.file;
+            fileName = Date.now() + '-' + file.name;
 
-    newPost.save()
-        .then(savedPost => {
-        console.log(savedPost);
-        res.redirect('/admin/posts');
-    }).catch(error => {
-        console.log('Could not save post');
-    });
+            file.mv('./public/uploads/' + fileName, (err) => {
+                if (err) throw err;
+            });
+        }
+
+        // Create variable to set up the initial allow comments
+        let allowComments = true;
+
+        // Condition Using Ternary Operator
+        (req.body.allowComments) ? allowComments = true : allowComments = false;
+
+        // Second condition
+        /*
+            if (req.body.allowComments) {
+                allowComments = true;
+            } else {
+                allowComments = false;
+            }*/
+
+        const newPost = new Post({
+            title: req.body.title,
+            status: req.body.status,
+            allowComments: req.body.allowComments,
+            body: req.body.body,
+            file: fileName
+        });
+
+        newPost.save()
+            .then(savedPost => {
+                console.log(savedPost);
+                res.redirect('/admin/posts');
+            }).catch(error => {
+            console.log('Could not save post');
+        });
+    }
 
 });
 
