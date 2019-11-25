@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
+const { isEmpty } = require('../../helpers/upload-helper');
 
 
 router.all('/*', (req, res, next) => {
@@ -29,19 +30,18 @@ router.get('/create', (req, res) => {
  */
 router.post('/create', (req, res) => {
 
-    // console.log(req.files);
+   if (!isEmpty(req.files)) {
+       let file = req.files.file;
+       let fileName = file.name;
 
-    let file = req.files.file;
-    let fileName = file.name;
-
-    file.mv('./public/uploads' + fileName, (err) => {
-        if (err) throw err;
-    });
-
-
+       file.mv('./public/uploads/' + fileName, (err) => {
+           if (err) throw err;
+       });
+   }
 
 
-/*
+
+
     // Create variable to set up the initial allow comments
     let allowComments = true;
 
@@ -49,12 +49,12 @@ router.post('/create', (req, res) => {
     (req.body.allowComments) ? allowComments = true : allowComments = false;
 
     // Second condition
-/!*
+/*
     if (req.body.allowComments) {
         allowComments = true;
     } else {
         allowComments = false;
-    }*!/
+    }*/
 
     const newPost = new Post({
         title: req.body.title,
@@ -70,7 +70,6 @@ router.post('/create', (req, res) => {
     }).catch(error => {
         console.log('Could not save post');
     });
-*/
 
 });
 
