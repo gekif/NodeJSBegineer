@@ -58,6 +58,11 @@ app.use(session({
 
 app.use(flash);
 
+// Local variables using Middleware
+app.use((req, res, next) => {
+    res.locals.success_message = req.flash('success_message');
+    next();
+});
 
 
 // Load Routes
