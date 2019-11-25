@@ -26,11 +26,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Register handlebars helpers
-const {select} = require('./helpers/handlebars-helpers');
-
+const {select, generateTime} = require('./helpers/handlebars-helpers');
 
 // Set View Engine
-app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select}}));
+app.engine('handlebars', exphbs({
+    defaultLayout: 'home',
+    helpers: {
+        select: select,
+        generateTime: generateTime
+    }}));
 app.set('view engine', 'handlebars');
 
 
