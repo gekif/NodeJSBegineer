@@ -14,9 +14,8 @@ router.get('/', (req, res) => {
     res.render('admin/index');
 });
 
+
 router.post('/generate-fake-posts', (req, res) => {
-    // Testing Faker
-    // res.send('it works');
 
     for (let i = 0; i < req.body.amount; i++) {
         let post = new Post();
@@ -34,11 +33,6 @@ router.post('/generate-fake-posts', (req, res) => {
     }
     res.redirect('/admin/posts');
 });
-
-/*router.get('/dashboard', (req, res) => {
-    res.render('admin/dashboard');
-});*/
-
 
 
 module.exports = router;
