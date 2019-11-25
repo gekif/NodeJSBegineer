@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
-const { isEmpty } = require('../../helpers/upload-helper');
+const fs = require('fs');
+const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 
 
 router.all('/*', (req, res, next) => {
@@ -29,19 +30,16 @@ router.get('/create', (req, res) => {
  * Insert data to the database
  */
 router.post('/create', (req, res) => {
-    let fileName = 'car.jpg';
+    let fileName = '';
 
    if (!isEmpty(req.files)) {
        let file = req.files.file;
-       let fileName = Date.now() + '-' + file.name;
+       fileName = Date.now() + '-' + file.name;
 
        file.mv('./public/uploads/' + fileName, (err) => {
            if (err) throw err;
        });
    }
-
-
-
 
     // Create variable to set up the initial allow comments
     let allowComments = true;
@@ -60,7 +58,7 @@ router.post('/create', (req, res) => {
     const newPost = new Post({
         title: req.body.title,
         status: req.body.status,
-        allowComments: allowComments,
+        allowComments: req.body.allowComments,
         body: req.body.body,
         file: fileName
     });
@@ -121,9 +119,21 @@ router.put('/edit/:id', (req, res) => {
  */
 
 router.delete('/:id', (req, res) => {
-    Post.remove({_id: req.params.id})
-        .then(result => {
-            res.redirect('/admin/posts');
+    Post.findOne({_id: req.params.id})
+        .then(post  => {
+            fs.unlink(uploadDir + post.file, (err) => {
+
+                /*if (err) {
+                    throw err;
+                } else {
+                    post.remove();
+                    res.redirect('/admin/posts');
+                }*/
+
+                post.remove();
+                res.redirect('/admin/posts');
+
+            });
         });
 });
 
