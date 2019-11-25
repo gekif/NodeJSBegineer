@@ -25,8 +25,7 @@ const PostSchema = new Schema({
     },
 
     file: {
-        type: String,
-        required: true
+        type: String
     }
 
 });

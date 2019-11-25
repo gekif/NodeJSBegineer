@@ -29,10 +29,11 @@ router.get('/create', (req, res) => {
  * Insert data to the database
  */
 router.post('/create', (req, res) => {
+    let fileName = 'car.jpg';
 
    if (!isEmpty(req.files)) {
        let file = req.files.file;
-       let fileName = file.name;
+       let fileName = Date.now() + '-' + file.name;
 
        file.mv('./public/uploads/' + fileName, (err) => {
            if (err) throw err;
@@ -60,7 +61,8 @@ router.post('/create', (req, res) => {
         title: req.body.title,
         status: req.body.status,
         allowComments: allowComments,
-        body: req.body.body
+        body: req.body.body,
+        file: fileName
     });
 
     newPost.save()
