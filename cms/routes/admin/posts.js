@@ -39,6 +39,12 @@ router.post('/create', (req, res) => {
         })
     }
 
+    if (!req.body.body) {
+        errors.push({
+            message: 'Please add a description'
+        })
+    }
+
     if (errors.length > 0) {
         res.render('admin/posts/create', {
             errors: errors
