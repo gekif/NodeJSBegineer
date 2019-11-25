@@ -20,6 +20,7 @@
     "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "method-override": "^2.3.10",
+    "moment": "^2.20.1",
     "mongoose": "^4.13.5"
   }
 }
