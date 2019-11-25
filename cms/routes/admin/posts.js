@@ -85,10 +85,10 @@ router.post('/create', (req, res) => {
 
         newPost.save()
             .then(savedPost => {
-                console.log(savedPost);
                 res.redirect('/admin/posts');
             }).catch(error => {
-            console.log('Could not save post');
+                res.render('admin/posts/create')
+            console.log(error, 'Could not save post');
         });
     }
 
