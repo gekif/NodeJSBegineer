@@ -27,7 +27,9 @@ app.engine('handlebars', exphbs({defaultLayout: 'home', helpers: {select: select
 app.set('view engine', 'handlebars');
 
 // Upload Middleware
-app.use(upload);
+app.use(upload({
+    limits: { fileSize: 50 * 1024 * 1024 }
+}));
 
 
 
@@ -49,6 +51,6 @@ app.use('/admin', admin);
 app.use('/admin/posts', posts);
 
 // Port for website
-app.listen(80, () => {
-    console.log(`listening on port 80`);
+app.listen(4500, () => {
+    console.log(`listening on port 4500`);
 });

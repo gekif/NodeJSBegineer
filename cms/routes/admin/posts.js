@@ -29,6 +29,19 @@ router.get('/create', (req, res) => {
  */
 router.post('/create', (req, res) => {
 
+    // console.log(req.files);
+
+    let file = req.files.file;
+    let fileName = file.name;
+
+    file.mv('./public/uploads' + fileName, (err) => {
+        if (err) throw err;
+    });
+
+
+
+
+/*
     // Create variable to set up the initial allow comments
     let allowComments = true;
 
@@ -36,12 +49,12 @@ router.post('/create', (req, res) => {
     (req.body.allowComments) ? allowComments = true : allowComments = false;
 
     // Second condition
-/*
+/!*
     if (req.body.allowComments) {
         allowComments = true;
     } else {
         allowComments = false;
-    }*/
+    }*!/
 
     const newPost = new Post({
         title: req.body.title,
@@ -57,6 +70,8 @@ router.post('/create', (req, res) => {
     }).catch(error => {
         console.log('Could not save post');
     });
+*/
+
 });
 
 
