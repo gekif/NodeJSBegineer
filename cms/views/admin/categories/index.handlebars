@@ -28,16 +28,20 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Date</th>
         </tr>
         </thead>
 
         <tbody>
+
+        {{#each categories}}
+
         <tr>
-            <td>11</td>
-            <td>PHP</td>
-            <td>Jan 1 2055</td>
+            <td>{{ id }}</td>
+            <td>{{ name }}</td>
         </tr>
+
+        {{/each}}
+
         </tbody>
 
     </table>

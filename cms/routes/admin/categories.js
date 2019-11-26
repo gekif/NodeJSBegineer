@@ -10,7 +10,11 @@ router.all('/*', (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    res.render('admin/categories/index');
+
+    Category.find({}).then(categories => {
+        res.render('admin/categories/index', {categories: categories});
+    });
+
 });
 
 
@@ -21,7 +25,7 @@ router.post('/create', (req, res) => {
     });
 
     newCategory.save().then(savedCategory => {
-        res.render('admin/categories/index');
+        res.redirect('/admin/categories');
     });
 
 });
