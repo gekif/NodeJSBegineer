@@ -3,7 +3,7 @@ const router = express.Router();
 const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const User = require('../../models/User');
-
+const bcrypt = require('bcryptjs');
 
 router.all('/*', (req, res, next) => {
     req.app.locals.layout = 'home';
@@ -96,9 +96,15 @@ router.post('/register', (req, res) => {
             password: req.body.password
         });
 
-        newUser.save().then(savedUser => {
-            res.send('User was saved');
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                console.log(hash);
+            });
         });
+
+        // newUser.save().then(savedUser => {
+        //     res.send('User was saved');
+        // });
 
     }
 
