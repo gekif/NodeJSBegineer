@@ -1,49 +1,59 @@
-<div class="col-sm-4">
-    <h1>Create Category</h1>
+<div class="row">
 
-    <form action="/admin/categories/create" method="post">
+    <div class="col-sm-4">
+        <h1>Create Category</h1>
 
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Enter title" class="form-control">
-        </div>
+        <form action="/admin/categories/create" method="post">
 
-        <button class="btn btn-primary">Create Category</button>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter title" class="form-control">
+            </div>
 
-    </form>
+            <button class="btn btn-primary">Create Category</button>
 
+        </form>
+
+    </div>
 </div>
+
 
 <br>
 
 <hr>
 
-<div class="col-sm-8">
 
-    <h1>Categories</h1>
+<div class="row">
 
-    <table class="table">
+    <div class="col-sm-8">
 
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-        </tr>
-        </thead>
+        <h1>Categories</h1>
 
-        <tbody>
+        <table class="table">
 
-        {{#each categories}}
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
 
-        <tr>
-            <td>{{ id }}</td>
-            <td>{{ name }}</td>
-        </tr>
+            <tbody>
 
-        {{/each}}
+            {{#each categories}}
 
-        </tbody>
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ name }}</td>
+                <td><a href="/admin/categories/{{ id }}" class="btn btn-info">Edit</a></td>
+            </tr>
 
-    </table>
+            {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
