@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../../models/Post');
+const Category = require('../../models/Category');
 const fs = require('fs');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 
@@ -22,7 +23,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/create', (req, res) => {
-    res.render('admin/posts/create');
+    Category.find({}).then(categories => {
+        res.render('admin/posts/create', {categories: categories});
+    });
 });
 
 
