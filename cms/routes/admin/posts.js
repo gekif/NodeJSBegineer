@@ -17,6 +17,7 @@ router.all('/*', (req, res, next) => {
  */
 router.get('/', (req, res) => {
     Post.find({})
+        .populate('category')
         .then(posts => {
         res.render('admin/posts', {posts: posts});
     });
@@ -83,6 +84,7 @@ router.post('/create', (req, res) => {
             status: req.body.status,
             allowComments: req.body.allowComments,
             body: req.body.body,
+            category: req.body.category,
             file: fileName
         });
 
@@ -105,12 +107,16 @@ router.post('/create', (req, res) => {
  * Editing the data
  */
 router.get('/edit/:id', (req, res) => {
-    // Testing the id
-    // res.send(req.params.id);
 
     Post.findOne({_id: req.params.id})
         .then(post => {
-        res.render('admin/posts/edit', {post: post});
+
+            Category.find({}).then(categories => {
+                res.render('admin/posts/edit', {
+                    post:post,
+                    categories: categories});
+            });
+
     });
 
 });
@@ -120,10 +126,6 @@ router.get('/edit/:id', (req, res) => {
  * PUT Request
  */
 router.put('/edit/:id', (req, res) => {
-    // Testing Put Request
-    // res.send('IT WORKS');
-
-
 
     Post.findOne({_id: req.params.id})
         .then(post => {
@@ -133,6 +135,7 @@ router.put('/edit/:id', (req, res) => {
         post.status = req.body.status;
         post.allowComments = req.body.allowComments;
         post.body = req.body.body;
+        post.category = req.body.category;
 
         if (!isEmpty(req.files)) {
             let file = req.files.file;

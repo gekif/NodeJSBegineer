@@ -16,9 +16,11 @@
     <div class="form-group">
         <label for="status">Category</label>
         <select name="category" id="status" class="form-control">
-            <option value="public">PHP</option>
-            <option value="private">NODE</option>
-            <option value="draft">Angular</option>
+
+                {{#each categories}}
+                    <option value="{{ id }}">{{ name }}</option>
+                {{/each}}
+
         </select>
     </div>
 
