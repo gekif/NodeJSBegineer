@@ -12,7 +12,7 @@ router.all('/*', (req, res, next) => {
 router.get('/', (req, res) => {
 
     Category.find({}).then(categories => {
-        res.render('admin/categories/index', {categories: categories});
+        res.render('admin/categories/', {categories: categories});
     });
 
 });
@@ -35,6 +35,21 @@ router.get('/edit/:id', (req, res) => {
 
     Category.findOne({_id: req.params.id}).then(category => {
         res.render('admin/categories/edit', {category: category});
+    });
+
+});
+
+
+router.put('/edit/:id', (req, res) => {
+
+    Category.findOne({_id: req.params.id}).then(category => {
+
+        category.name = req.body.name;
+
+        category.save().then(savedCategory => {
+            res.redirect('/admin/categories');
+        });
+
     });
 
 });
