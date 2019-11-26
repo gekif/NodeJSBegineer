@@ -1,22 +1,43 @@
-<h1>Categories</h1>
+<div class="col-sm-4">
+    <h1>Create Category</h1>
 
-<div class="row">
+    <form action="/admin/categories/create">
 
-    <div class="col-sm-4">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Enter title" class="form-control">
+        </div>
 
-        <form action="/admin/categories/create">
+        <button class="btn btn-primary">Create Category</button>
 
-            <div class="form-group">
+    </form>
 
-                <label for="name">Name</label>
-                <input type="text" name="name" placeholder="Enter title" class="form-control">
+</div>
 
-            </div>
+<hr>
 
-            <button class="btn btn-primary">Create Category</button>
+<div class="col-sm-8">
 
-        </form>
+    <h1>Categories</h1>
 
-    </div>
+    <table class="table">
+
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>11</td>
+            <td>PHP</td>
+            <td>Jan 1 2055</td>
+        </tr>
+        </tbody>
+
+    </table>
 
 </div>
