@@ -10,6 +10,7 @@ const upload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
 const { mongoDbUrl } = require('./config/database');
+const passport = require('passport');
 
 
 // Fix Deprecated Promises
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Register handlebars helpers
 const {select, generateDate} = require('./helpers/handlebars-helpers');
 
+
 // Set View Engine
 app.engine('handlebars', exphbs({
     defaultLayout: 'home',
@@ -41,6 +43,7 @@ app.set('view engine', 'handlebars');
 
 // Upload Middleware
 app.use(upload());
+
 
 // Set Up Body Parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -56,10 +59,16 @@ app.use(session({
     secret: 'gekif',
     resave: true,
     saveUninitialized: true,
-
 }));
 
+
 app.use(flash());
+
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Local variables using Middleware
 app.use((req, res, next) => {
