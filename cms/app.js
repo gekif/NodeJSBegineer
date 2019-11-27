@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const upload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
+const { mongoDbUrl } = require('./config/database');
 
 
 // Fix Deprecated Promises
@@ -16,7 +17,7 @@ mongoose.Promise = global.Promise;
 
 
 // Connect to MongoDB using Mongoose
-mongoose.connect('mongodb://localhost:27017/cms', {useMongoClient: true}).then(db => {
+mongoose.connect(mongoDbUrl, {useMongoClient: true}).then(db => {
     console.log("MONGO connected")
 }).catch(error => console.log(error));
 
