@@ -40,6 +40,11 @@ router.get('/login', (req, res) => {
 
 
 // App Login
+passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
+    console.log(password);
+}));
+
+
 router.post('/login', (req, res, next) => {
 
     passport.authenticate('local', {
@@ -47,8 +52,6 @@ router.post('/login', (req, res, next) => {
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
-
-    res.send('login post works');
 
 });
 
