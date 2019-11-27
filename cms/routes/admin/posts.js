@@ -4,6 +4,7 @@ const Post = require('../../models/Post');
 const Category = require('../../models/Category');
 const fs = require('fs');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
+const { userAuthenticated } = require('../../helpers/authentication');
 
 
 router.all('/*', (req, res, next) => {
