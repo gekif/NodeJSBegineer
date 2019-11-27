@@ -26,4 +26,9 @@ const UserSchema = new Schema({
 });
 
 
+UserSchema.methods.testMethod = function () {
+
+};
+
+
 module.exports = mongoose.model('users', UserSchema);

@@ -41,7 +41,27 @@ router.get('/login', (req, res) => {
 
 // App Login
 passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
-    console.log(password);
+
+    console.log(email);
+
+    User.findOne({email: email}).then(user => {
+
+        if (!user) return done(null, false, {message: 'No user found'} );
+
+        bcrypt.compare(password, user.password, (err, matched) => {
+
+            if (err) return err;
+
+            if (matched) {
+                return done(null, user);
+            } else {
+                return done(null, false, {message: 'Incorrect password.'});
+            }
+
+        });
+
+    });
+
 }));
 
 
