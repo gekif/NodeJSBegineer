@@ -12,8 +12,10 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
 
-    Comment.find({}).then(comments => {
-        res.render('admin/comments', {comments: comments});
+    Comment.find()
+        .populate('user')
+        .then(comments => {
+            res.render('admin/comments', {comments: comments});
     });
 
 });
