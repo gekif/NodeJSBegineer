@@ -89,6 +89,7 @@
                     <form action="/admin/comments" method="post">
                         <div class="form-group">
                             <textarea name="body" class="form-control" rows="3"></textarea>
+                            <input type="hidden" name="id" value="{{ post.id }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
