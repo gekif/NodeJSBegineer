@@ -12,7 +12,7 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
 
-    Comment.find()
+    Comment.find({user: req.user.id})
         .populate('user')
         .then(comments => {
             res.render('admin/comments', {comments: comments});
