@@ -81,6 +81,7 @@ router.post('/create', (req, res) => {
             }*/
 
         const newPost = new Post({
+            user: req.user.id,
             title: req.body.title,
             status: req.body.status,
             allowComments: req.body.allowComments,
@@ -132,6 +133,7 @@ router.put('/edit/:id', (req, res) => {
         .then(post => {
         (req.body.allowComments) ? allowComments = true : allowComments = false;
 
+        post.user = req.user.id;
         post.title = req.body.title;
         post.status = req.body.status;
         post.allowComments = req.body.allowComments;
