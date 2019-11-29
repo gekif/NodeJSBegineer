@@ -32,7 +32,7 @@ router.get('/my-posts', (req, res) => {
     Post.find({user: req.user.id})
         .populate('category')
         .then(posts => {
-            res.render('admin/posts/my-post', {posts: posts});
+            res.render('admin/posts/my-posts', {posts: posts});
         });
 
 });

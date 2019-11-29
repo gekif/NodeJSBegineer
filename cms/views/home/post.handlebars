@@ -116,12 +116,12 @@
             {{/if}}
 
 
-            {{#each comments}}
+            {{#each post.comments}}
                 <div class="media mb-4">
                     <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                     <div class="media-body">
                         <h5 class="mt-0">{{ user.firstName }}</h5>
-                       {{ body }}
+                        {{ body }}
                     </div>
                 </div>
             {{/each}}
@@ -129,11 +129,13 @@
 
         </div>
 
+
         {{> home/sidebar}}
 
         <!-- /.row -->
 
     </div>
+
     <!-- /.container -->
 
     <!-- Bootstrap core JavaScript -->
