@@ -17,12 +17,26 @@ router.all('/*', (req, res, next) => {
  * Display data to from database
  */
 router.get('/', (req, res) => {
+
     Post.find({})
         .populate('category')
         .then(posts => {
         res.render('admin/posts', {posts: posts});
     });
+
 });
+
+
+router.get('/my-posts', (req, res) => {
+
+    Post.find({user: req.user.id})
+        .populate('category')
+        .then(posts => {
+            res.render('admin/posts/my-post', {posts: posts});
+        });
+
+});
+
 
 router.get('/create', (req, res) => {
     Category.find({}).then(categories => {
