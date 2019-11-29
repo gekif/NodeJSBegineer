@@ -24,7 +24,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -73,7 +74,8 @@
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-fluid rounded" style="width: 880px; height: 280px" src="{{#if post.file }} /uploads/{{ post.file }} {{else}} http://placehold.it/900x300 {{/if}}" alt="">
+            <img class="img-fluid rounded" style="width: 880px; height: 280px"
+                 src="{{#if post.file }} /uploads/{{ post.file }} {{else}} http://placehold.it/900x300 {{/if}}" alt="">
 
             <!-- http://placehold.it/900x300 -->
             <hr>
@@ -82,33 +84,51 @@
 
             <hr>
 
-            <!-- Comments Form -->
-            <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form action="/admin/comments" method="post">
-                        <div class="form-group">
-                            <textarea name="body" class="form-control" rows="3"></textarea>
-                            <input type="hidden" name="id" value="{{ post.id }}">
+            {{#if user}}
+
+                {{#if post.allowComments }}
+
+                    <!-- Comments Form -->
+                    <div class="card my-4">
+                        <h5 class="card-header">Leave a Comment:</h5>
+                        <div class="card-body">
+                            <form action="/admin/comments" method="post">
+                                <div class="form-group">
+                                    <textarea name="body" class="form-control" rows="3"></textarea>
+                                    <input type="hidden" name="id" value="{{ post.id }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
+                    </div>
+
+                {{else}}
+                    <h2>Comment not allowed for this</h2>
+                    <br>
+                    <hr>
+
+                {{/if}}
+
+            {{else}}
+                You need to login to comment <a href="/login">Login</a>
+                <br>
+                <hr>
+            {{/if}}
 
         </div>
 
         {{> home/sidebar}}
 
-    <!-- /.row -->
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </div>
-<!-- /.container -->
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
