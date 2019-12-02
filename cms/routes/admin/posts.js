@@ -167,7 +167,7 @@ router.put('/edit/:id', (req, res) => {
         post.save()
             .then(updatedPost => {
                 req.flash('success_message', 'Post was successfully updated');
-                res.redirect('/admin/posts');
+                res.redirect('/admin/posts/my-posts');
         });
     });
 
