@@ -12,7 +12,8 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
 
-    Comment.find({user: req.user.id})
+    // Comment.find({user: req.user.id})
+    Comment.find({user: '5ddd005fb2c16b76a4aff51b'})
         .populate('user')
         .then(comments => {
             res.render('admin/comments', {comments: comments});
@@ -64,6 +65,13 @@ router.delete('/:id', (req, res) => {
 
 
     });
+
+});
+
+
+router.post('/approve-comment', (req, res) => {
+
+    res.send('It Works');
 
 });
 
