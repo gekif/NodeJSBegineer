@@ -44,7 +44,7 @@ router.get('/login', (req, res) => {
 // App Login
 passport.use(new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
 
-    console.log(email);
+    // console.log(email);
 
     User.findOne({email: email}).then(user => {
 
