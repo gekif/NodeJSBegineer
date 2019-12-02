@@ -38,6 +38,9 @@
 <!-- Bootstrap switch -->
 <script src="/js/admin/bootstrap-switch.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+
+
 <script>
 
     $("[name='approveComment']").bootstrapSwitch();
@@ -59,7 +62,7 @@
                 },
                 cache: false,
                 success: function(data) {
-
+                    toastr.success(`Comment with id ${data._id} was update`);
                 }
 
             });
