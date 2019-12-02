@@ -28,6 +28,7 @@ router.post('/generate-fake-posts', (req, res) => {
         post.status = 'public';
         post.allowComments = faker.random.boolean();
         post.body = faker.lorem.sentences();
+        post.slug = faker.name.title();
 
         // post.save().then(savedPost => {});
         post.save((err) => {
