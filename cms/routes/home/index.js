@@ -192,9 +192,9 @@ router.post('/register', (req, res) => {
 });
 
 
-router.get('/post/:id', (req, res) => {
+router.get('/post/:slug', (req, res) => {
 
-    Post.findOne({_id: req.params.id})
+    Post.findOne({slug: req.params.slug})
         .populate({
             path: 'comments',
             match: {approveComment: true},
