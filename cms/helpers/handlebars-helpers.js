@@ -38,7 +38,13 @@ module.exports = {
                 output += `<li class="page-item"><a href="?page=${i}" class="page-link">${i}</a></li>`;
             }
 
+            if (i === Number(options.hash.current) + 4 && i < options.hash.pages) {
+                output += `<li class="page-item disabled"><a class="page-link">...</a></li>`;
+            }
+
             // Maybe the dots
+
+
         }
 
         if (options.hash.current === options.hash.pages) {
