@@ -71,7 +71,7 @@ router.delete('/:id', (req, res) => {
 
 router.post('/approve-comment', (req, res) => {
 
-    res.send('It Works');
+    console.log(req.body.approveComment);
 
 });
 
