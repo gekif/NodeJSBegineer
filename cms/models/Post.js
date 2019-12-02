@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const URLSlugs = require('mongoose-url-slugs');
 
 
 const Schema = mongoose.Schema;
@@ -41,6 +42,10 @@ const PostSchema = new Schema({
     date: {
         type: Date,
         default: Date.now()
+    },
+
+    slug: {
+        type: String
     },
 
     comments: [{
